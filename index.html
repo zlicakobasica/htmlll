@@ -35,11 +35,33 @@
             transform: scale(1.1);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
         }
+        header {
+            background-color: rgba(255, 192, 203, 0.8);
+            text-align: center;
+            padding: 20px;
+            font-size: 2em;
+            font-weight: bold;
+            border-bottom: 2px solid deeppink;
+        }
+        footer {
+            background-color: rgba(255, 192, 203, 0.8);
+            text-align: center;
+            padding: 10px;
+            font-size: 1em;
+            border-top: 2px solid deeppink;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
     
     </head>
     
     <body>
+    
+    <header>
+        <strong>dobrodošli</strong>
+    </header>
     
     <h2> ja sam ti si </h2>
     <p> on ona ono je <br> mi smo vi ste oni su </p>
@@ -49,6 +71,26 @@
     <br> <button onclick="window.location.href='https://lamija9.github.io/tata/'">Odvedi me do tate</button>
     <br><br>
     <img src="jutrićkaficacigaricablokadica.jpg" alt="jutrićkaficacigariscablokadica" width="300" height="200" style="border: 2px solid black; border-radius: 10px;">
+    
+    <form style="margin-top: 20px;">
+        <label for="name">Ime:</label>
+        <input type="text" id="name" name="name" style="margin-bottom: 10px; padding: 5px; border-radius: 5px; border: 1px solid gray;"><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" style="margin-bottom: 10px; padding: 5px; border-radius: 5px; border: 1px solid gray;"><br>
+        <label for="message">Poruka:</label><br>
+        <textarea id="message" name="message" rows="4" cols="30" style="padding: 5px; border-radius: 5px; border: 1px solid gray;"></textarea><br>
+        <label for="options">Izaberite opciju:</label>
+        <select id="options" name="options" style="margin-bottom: 10px; padding: 5px; border-radius: 5px; border: 1px solid gray;">
+            <option value="opcija1">izaberi mene</option>
+            <option value="opcija2">ne ne mene izaberi</option>
+            <option value="opcija3">bice posljedica</option>
+        </select><br>
+        <button type="submit" style="margin-top: 10px;">Pošalji</button>
+    </form>
+    
+    <footer>
+    haha <em>footer</em> 
+    </footer>
     
     </body>
 
