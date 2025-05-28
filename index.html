@@ -68,7 +68,7 @@
     
     <img src="ja kad.jpg" alt="Slika" width="300" height="200" style="border: 2px solid black; border-radius: 10px;">
 
-    <br> <button onclick="window.location.href='https://lamija9.github.io/tata/'">Odvedi me do tate</button>
+    <br> <button onclick="window.location.href='https://misobadnjar.github.io/tata/'">Odvedi me do tate</button>
     <br><br>
     <img src="jutrićkaficacigaricablokadica.jpg" alt="jutrićkaficacigariscablokadica" width="300" height="200" style="border: 2px solid black; border-radius: 10px;">
     
@@ -91,6 +91,36 @@
     <footer>
     haha <em>footer</em> 
     </footer>
+
+    <!-- Dugme za prikaz GIF-ova i muzike -->
+    <button id="skrillexBtn" style="margin: 30px auto; display: block;">Pusti Skrillex i GIF-ove</button>
+
+    <!-- Skriveni GIF-ovi i audio -->
+    <div id="gifMusicContainer" style="display:none; text-align:center; margin-top:20px;">
+        <img src="gif1.gif" width="150" style="margin:10px;">
+        <img src="gif2.gif" width="150" style="margin:10px;">
+        <img src="gif3.gif" width="150" style="margin:10px;">
+        <img src="gif4.gif" width="150" style="margin:10px;">
+        <audio id="skrillexAudio" src="skrillex.mp3"></audio>
+    </div>
+
+    <script>
+    const btn = document.getElementById('skrillexBtn');
+    const container = document.getElementById('gifMusicContainer');
+    const audio = document.getElementById('skrillexAudio');
+
+    btn.onclick = function() {
+        container.style.display = 'block';
+        audio.currentTime = 0;
+        audio.play();
+        btn.disabled = true;
+    };
+
+    audio.onended = function() {
+        container.style.display = 'none';
+        btn.disabled = false;
+    };
+    </script>
     
     </body>
 
