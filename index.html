@@ -72,52 +72,137 @@
     <br><br>
     <img src="jutrićkaficacigaricablokadica.jpg" alt="jutrićkaficacigariscablokadica" width="300" height="200" style="border: 2px solid black; border-radius: 10px;">
     
-    <form style="margin-top: 20px;">
+    <form id="mainForm" style="margin-top: 20px;">
         <label for="name">Ime:</label>
         <input type="text" id="name" name="name" style="margin-bottom: 10px; padding: 5px; border-radius: 5px; border: 1px solid gray;"><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" style="margin-bottom: 10px; padding: 5px; border-radius: 5px; border: 1px solid gray;"><br>
-        <label for="message">Poruka:</label><br>
-        <textarea id="message" name="message" rows="4" cols="30" style="padding: 5px; border-radius: 5px; border: 1px solid gray;"></textarea><br>
+    
         <label for="options">Izaberite opciju:</label>
         <select id="options" name="options" style="margin-bottom: 10px; padding: 5px; border-radius: 5px; border: 1px solid gray;">
             <option value="opcija1">izaberi mene</option>
             <option value="opcija2">ne ne mene izaberi</option>
             <option value="opcija3">bice posljedica</option>
         </select><br>
-        <button type="submit" style="margin-top: 10px;">Pošalji</button>
+
+          <label for="options">Volite li kobasice?</label>
+        <select id="options" name="options" style="margin-bottom: 10px; padding: 5px; border-radius: 5px; border: 1px solid gray;">
+            <option value="opcija1">da</option>
+            <option value="opcija2">ne</option>
+            <option value="opcija3">bice posljedica</option>
+        </select><br>
+
+          <label for="options">Čujem nešto kao..</label>
+        <select id="options" name="options" style="margin-bottom: 10px; padding: 5px; border-radius: 5px; border: 1px solid gray;">
+            <option value="opcija1">DO YOU WANNA DANCE?</option>
+            <option value="opcija2">lol</option>
+            <option value="opcija3">bice posljedica</option>
+        </select><br>
+        
+        <button type="submit" style="margin-top: 10px;">Mislim da me pita...</button>
     </form>
-    
+
     <footer>
     haha <em>footer</em> 
     </footer>
 
-    <!-- Dugme za prikaz GIF-ova i muzike -->
-    <button id="showGifsBtn" style="margin: 30px auto; display: block;">Pusti GIF-ove i zvuk</button>
-
-    <!-- Skriveni GIF-ovi i audio -->
-    <div id="gifMusicContainer" style="display:none; text-align:center; margin-top:20px;">
-        <img src="1.gif" width="150" style="margin:10px;">
-        <img src="2.gif" width="150" style="margin:10px;">
-        <img src="3.gif" width="150" style="margin:10px;">
-        <audio id="soundAudio" src="4.mp3"></audio>
+    <!-- Dugme za prikazivanje GIF-ova (skriveno dok se ne pošalje forma) -->
+    <div style="text-align:center; margin-top:30px;">
+        <button id="showGifsBtn" style="display:none;">Da li sam za..</button>
     </div>
 
-    <script></script>
-    const btn = document.getElementById('showGifsBtn');
-    const container = document.getElementById('gifMusicContainer');
-    const audio = document.getElementById('soundAudio');
+    <!-- Disco lights overlay (skriveno po defaultu) -->
+    <div id="discoLights" style="display:none; pointer-events:none; position:fixed; left:0; top:0; width:100vw; height:100vh; z-index:9999;">
+        <canvas id="discoCanvas" width="1920" height="1080" style="width:100vw; height:100vh; display:block;"></canvas>
+    </div>
 
-    btn.onclick = function() {
-        container.style.display = 'block';
-        audio.currentTime = 0;
-        audio.play();
-        btn.disabled = true;
+    <!-- Dodato: Prikaz 5.gif iznad ostalih GIF-ova, sada skriveno dok se ne klikne dugme -->
+    <div id="gifsSection" style="display:none;">
+        <div style="text-align:center; margin-top:30px;">
+            <img src="5.gif" alt="gif5" width="180" style="margin-bottom:15px;">
+        </div>
+        <div style="text-align:center; margin: 30px 0; display: flex; justify-content: center; align-items: center; gap: 20px;">
+            <img src="1.gif" alt="gif1" width="100" style="margin:0;">
+            <img src="2.gif" alt="gif2" width="200" style="margin:0;">
+            <img src="3.gif" alt="gif3" width="200" style="margin:0;">
+        </div>
+        <!-- Audio za 4.mp3 -->
+        <audio id="sound4" src="dens.mp3"></audio>
+    </div>
+
+    <script>
+    function startDisco() {
+        const discoDiv = document.getElementById('discoLights');
+        const canvas = document.getElementById('discoCanvas');
+        const ctx = canvas.getContext('2d');
+        let running = true;
+        discoDiv.style.display = 'block';
+
+        // Resize canvas to window
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Disco lights animation
+        function discoFrame() {
+            if (!running) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < 8; i++) {
+                let x = (canvas.width / 8) * i + (Math.sin(Date.now()/400 + i) * 80);
+                let y = (canvas.height / 2) + (Math.cos(Date.now()/500 + i) * 200);
+                let radius = 120 + 40 * Math.sin(Date.now()/300 + i*2);
+                let hue = (Date.now()/10 + i*45) % 360;
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fillStyle = `hsla(${hue}, 90%, 60%, 0.35)`;
+                ctx.fill();
+            }
+            requestAnimationFrame(discoFrame);
+        }
+        discoFrame();
+
+        // Return a function to stop disco
+        return function stopDisco() {
+            running = false;
+            discoDiv.style.display = 'none';
+            window.removeEventListener('resize', resizeCanvas);
+        };
+    }
+
+    // Prikaži "Klikni za party" tek kad se pošalje forma
+    document.getElementById('mainForm').onsubmit = function(e) {
+        e.preventDefault();
+        document.getElementById('showGifsBtn').style.display = 'inline-block';
+        // Možete dodati i poruku ili reset forme ako želite
     };
 
-    audio.onended = function() {
-        container.style.display = 'none';
-        btn.disabled = false;
+    document.getElementById('showGifsBtn').onclick = function() {
+        // Promeni pozadinu na 8941.jpg
+        document.body.style.background = "url('8941.jpg') no-repeat center center fixed";
+        document.body.style.backgroundSize = "cover";
+
+        document.getElementById('gifsSection').style.display = 'block';
+        this.style.display = 'none';
+
+        // Pokreni disco svjetla
+        const stopDisco = startDisco();
+
+        var audio = document.getElementById('sound4');
+        if (audio) {
+            audio.currentTime = 0;
+            audio.play();
+            audio.onended = function() {
+                document.getElementById('gifsSection').style.display = 'none';
+                // Skloni dugme dok se ponovo ne pošalje forma
+                document.getElementById('showGifsBtn').style.display = 'none';
+                // Vrati staru pozadinu
+                document.body.style.background = "url('poz.png') no-repeat center center fixed";
+                document.body.style.backgroundSize = "cover";
+                // Zaustavi disco svjetla
+                stopDisco();
+            };
+        }
     };
     </script>
     
