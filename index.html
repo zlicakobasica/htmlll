@@ -93,21 +93,20 @@
     </footer>
 
     <!-- Dugme za prikaz GIF-ova i muzike -->
-    <button id="skrillexBtn" style="margin: 30px auto; display: block;">Pusti Skrillex i GIF-ove</button>
+    <button id="showGifsBtn" style="margin: 30px auto; display: block;">Pusti GIF-ove i zvuk</button>
 
     <!-- Skriveni GIF-ovi i audio -->
     <div id="gifMusicContainer" style="display:none; text-align:center; margin-top:20px;">
-        <img src="gif1.gif" width="150" style="margin:10px;">
-        <img src="gif2.gif" width="150" style="margin:10px;">
-        <img src="gif3.gif" width="150" style="margin:10px;">
-        <img src="gif4.gif" width="150" style="margin:10px;">
-        <audio id="skrillexAudio" src="skrillex.mp3"></audio>
+        <img src="1.gif" width="150" style="margin:10px;">
+        <img src="2.gif" width="150" style="margin:10px;">
+        <img src="3.gif" width="150" style="margin:10px;">
+        <audio id="soundAudio" src="4.mp3"></audio>
     </div>
 
-    <script>
-    const btn = document.getElementById('skrillexBtn');
+    <script></script>
+    const btn = document.getElementById('showGifsBtn');
     const container = document.getElementById('gifMusicContainer');
-    const audio = document.getElementById('skrillexAudio');
+    const audio = document.getElementById('soundAudio');
 
     btn.onclick = function() {
         container.style.display = 'block';
